@@ -28,12 +28,12 @@ namespace ToDoList.Services
 
         public Task GetById(int id)
         {
-            return Context.Tasks.Where(Task => Task.Id == id).First();
+            return Context.Tasks.Find(id);
         }
 
         public void DeleteById(int id)
         {
-            var task = Context.Tasks.Where(Task => Task.Id == id).First();
+            var task = Context.Tasks.Find(id);
             Context.Tasks.Remove(task);
             Context.SaveChanges();
         }
@@ -46,7 +46,7 @@ namespace ToDoList.Services
 
         public Task SwitchReadyState(int id)
         {
-            var task = Context.Tasks.Where(Task => Task.Id == id).First();
+            var task = Context.Tasks.Find(id);
             task.Done = !task.Done;
             Context.SaveChanges();
             return task;
@@ -54,7 +54,7 @@ namespace ToDoList.Services
 
         public Task ChangeName(int id, Task update)
         {
-            var task = Context.Tasks.Where(Task => Task.Id == id).First();
+            var task = Context.Tasks.Find(id);
             task.Name = update.Name;
             Context.SaveChanges();
             return task;
